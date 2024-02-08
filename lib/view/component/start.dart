@@ -18,18 +18,6 @@ class MyStart extends StatelessWidget {
         width: 290,
         child: Stack(
           children: [
-            Positioned(
-              top: 5,
-              left: 5,
-              child: Row(
-                children: [
-                  Image.asset(
-                    context.getAssets() + slot,
-                    height: 20,
-                  )
-                ],
-              ),
-            ),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,6 +25,18 @@ class MyStart extends StatelessWidget {
                   Text(title, style: Theme.of(context).textTheme.titleMedium),
                   Text("${score}pts",
                       style: Theme.of(context).textTheme.bodyMedium),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 5,
+              right: 5,
+              child: Row(
+                children: [
+                  Image.asset(
+                    context.getAssets() + slot,
+                    height: 18,
+                  )
                 ],
               ),
             ),

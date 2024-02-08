@@ -22,14 +22,14 @@ class MyHome extends StatelessWidget {
               context.customTitle,
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyButton(
                   action: () => pushOptions(context, const MyTest()),
                   child: const MyStart(
-                    title: 'Minesweeper',
+                    title: 'New game',
                     score: '0',
                     slot: 'start.png',
                   ),
