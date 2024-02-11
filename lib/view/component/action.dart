@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
 
+import 'package:minesweeper/context.dart';
+
 class MyAction extends StatelessWidget {
-  const MyAction({super.key});
+  const MyAction({super.key, required this.title, required this.icon});
+
+  final String title, icon;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
-      width: 50,
-      child: Center(
-          child: Text("OK",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium)),
-    );
+        height: 40,
+        width: 300,
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+                ],
+              ),
+            ),
+            Container(
+                margin: const EdgeInsets.only(right: 10.0),
+                child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Image.asset(
+                      context.getAssets() + icon,
+                      height: 18,
+                    )))
+          ],
+        ));
   }
 }

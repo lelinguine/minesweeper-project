@@ -32,7 +32,9 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(fontSize: 16.0, height: 1.3),
         ),
       ),
-      home: const MyHome(),
+      home: const MyHome(
+        score: '0',
+      ),
     );
   }
 }
