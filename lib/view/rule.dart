@@ -14,9 +14,6 @@ class MyRule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
       body: Stack(
         children: [
           Align(
@@ -32,13 +29,31 @@ class MyRule extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 20.0),
             child: Align(
               alignment: Alignment.bottomCenter,
-              child: MyButton(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  MyButton(
                 action: () => pushOptions(context, const MyGame()),
                 child: const MyAction(
-                  title: 'Understand',
-                  icon: 'check.png',
+                  title: 'Difficulty',
+                  icon: 'refresh.png',
+                  height: 40,
+                  width: 300,
                 ),
               ),
+              const SizedBox(height: 10),
+                  MyButton(
+                    action: () => Navigator.popUntil(
+                        context, (route) => route.isFirst),
+                    child: const MyAction(
+                      title: 'Understand',
+                      icon: 'check.png',
+                      height: 40,
+                      width: 300,
+                    ),
+                  ),
+                ],
+              )
             ),
           ),
         ],

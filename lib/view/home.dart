@@ -40,6 +40,8 @@ class MyHome extends StatelessWidget {
                 child: const MyAction(
                   title: 'New game',
                   icon: 'start.png',
+                  height: 40,
+                  width: 300,
                 ),
               ),
             ),

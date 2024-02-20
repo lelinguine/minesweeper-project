@@ -1,20 +1,42 @@
 import 'package:flutter/material.dart';
 
-class MyGame extends StatelessWidget {
+import 'package:minesweeper/view/component/button.dart';
+import 'package:minesweeper/view/component/action.dart';
+import 'package:minesweeper/view/component/grille.dart';
+
+class MyGame extends StatefulWidget {
   const MyGame({Key? key}) : super(key: key);
+
+  @override
+  _MyGameState createState() => _MyGameState();
+}
+
+class _MyGameState extends State<MyGame> {
+  _MyGameState();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).primaryColor),
       body: Stack(
         children: [
           Center(
-            child: Text(
-              'TODO: Game board here...',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
+            child: MyGrille(),
           ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 20.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: MyButton(
+                    action: () => Navigator.popUntil(context, (route) => route.isFirst),
+                    child: const MyAction(
+                      title: 'Finish',
+                      icon: 'finish.png',
+                      height: 40,
+                      width: 300,
+                    ),
+                  ),
+            ),
+          ),    
         ],
       ),
     );
