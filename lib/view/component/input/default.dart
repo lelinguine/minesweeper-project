@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/context.dart';
 
 class MyAction extends StatelessWidget {
-  const MyAction({super.key, required this.title, required this.icon,
-  required this.height, required this.width});
+  const MyAction(
+      {super.key,
+      required this.title,
+      required this.icon,
+      required this.height,
+      required this.width});
 
   final String title, icon;
   final double height, width;

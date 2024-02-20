@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:minesweeper/view/component/button.dart';
-import 'package:minesweeper/view/component/action.dart';
+import 'package:minesweeper/view/component/input/button.dart';
+import 'package:minesweeper/view/component/input/default.dart';
 import 'package:minesweeper/view/component/grille.dart';
 
 class MyGame extends StatefulWidget {
-  const MyGame({Key? key}) : super(key: key);
+  const MyGame({Key? key, required this.difficulty}) : super(key: key);
+
+  final String difficulty;
 
   @override
-  _MyGameState createState() => _MyGameState();
+  MyGameState createState() => MyGameState();
 }
 
-class _MyGameState extends State<MyGame> {
-  _MyGameState();
+class MyGameState extends State<MyGame> {
+  MyGameState();
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +29,17 @@ class _MyGameState extends State<MyGame> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: MyButton(
-                    action: () => Navigator.popUntil(context, (route) => route.isFirst),
-                    child: MyAction(
-                      title: 'Finish',
-                      icon: 'finish.png',
-                      height: 40,
-                      width: 300,
-                    ),
-                  ),
+                action: () =>
+                    Navigator.popUntil(context, (route) => route.isFirst),
+                child: const MyAction(
+                  title: 'Finish',
+                  icon: 'finish.png',
+                  height: 40,
+                  width: 300,
+                ),
+              ),
             ),
-          ),    
+          ),
         ],
       ),
     );

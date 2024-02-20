@@ -8,7 +8,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,19 +22,19 @@ class MyApp extends StatelessWidget {
         primaryColor: context.isDark() ? Colors.black : Colors.white,
         secondaryHeaderColor: context.isDark() ? Colors.white : Colors.black,
         brightness: context.isDark() ? Brightness.dark : Brightness.light,
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           titleLarge: TextStyle(
-            fontSize: 48.0,
-            fontWeight: FontWeight.w900
-          ),
+              fontSize: 48.0,
+              fontWeight: FontWeight.w900,
+              color: context.isDark() ? Colors.white : Colors.black),
           titleMedium: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.w600
-          ),
+              fontSize: 24.0,
+              fontWeight: FontWeight.w600,
+              color: context.isDark() ? Colors.white : Colors.black),
           bodyMedium: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.w600
-          ),
+              fontSize: 18.0,
+              fontWeight: FontWeight.w600,
+              color: context.isDark() ? Colors.white : Colors.black),
         ),
       ),
       home: const MyHome(

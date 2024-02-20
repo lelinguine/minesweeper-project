@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:minesweeper/context.dart';
 
-import 'package:minesweeper/view/component/button.dart';
-import 'package:minesweeper/view/component/action.dart';
+import 'package:minesweeper/view/component/input/button.dart';
+import 'package:minesweeper/view/component/input/default.dart';
 
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/rule.dart';
@@ -37,7 +37,7 @@ class MyHome extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: MyButton(
                 action: () => pushOptions(context, MyRule()),
-                child: MyAction(
+                child: const MyAction(
                   title: 'New game',
                   icon: 'start.png',
                   height: 40,

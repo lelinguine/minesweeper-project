@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:minesweeper/context.dart';
 
-import 'package:minesweeper/view/component/button.dart';
-import 'package:minesweeper/view/component/action.dart';
+import 'package:minesweeper/view/component/input/button.dart';
+import 'package:minesweeper/view/component/input/default.dart';
+import 'package:minesweeper/view/component/input/select.dart';
 
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/game.dart';
@@ -11,27 +12,32 @@ import 'package:minesweeper/view/game.dart';
 class MyRule extends StatefulWidget {
   MyRule({Key? key}) : super(key: key);
 
-    @override
-  _MyRuleState createState() => _MyRuleState();
+  @override
+  MyRuleState createState() => MyRuleState();
 }
 
-class _MyRuleState extends State<MyRule> {
-  _MyRuleState();
+class MyRuleState extends State<MyRule> {
+  MyRuleState();
 
   String difficulty = "Easy";
+  Color color = Color(int.parse('0xFF06d6a0'));
+  GlobalKey<MySelectState> selectKey = GlobalKey();
+  GlobalKey<MyButtonState> buttonKey = GlobalKey();
 
-  void _updateDifficulty() {
+  void updateDifficulty() {
     setState(() {
-      if(difficulty == "Easy")  {
+      if (difficulty == "Easy") {
+        color = Color(int.parse('0xFFffd166'));
         difficulty = "Medium";
-      }
-      else if(difficulty == "Medium")  {
+      } else if (difficulty == "Medium") {
+        color = Color(int.parse('0xFFef476f'));
         difficulty = "Hard";
-      }
-      else if(difficulty == "Hard")  {
+      } else if (difficulty == "Hard") {
+        color = Color(int.parse('0xFF06d6a0'));
         difficulty = "Easy";
       }
-      print(difficulty);
+      buttonKey.currentState?.updateColor(color);
+      selectKey.currentState?.updateDifficulty(difficulty);
     });
   }
 
@@ -52,32 +58,35 @@ class _MyRuleState extends State<MyRule> {
           Container(
             margin: const EdgeInsets.only(bottom: 20.0),
             child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  MyButton(
-                action: () => _updateDifficulty(),
-                child: MyAction(
-                  title: difficulty,
-                  icon: 'refresh.png',
-                  height: 40,
-                  width: 300,
-                ),
-              ),
-              const SizedBox(height: 10),
-                  MyButton(
-                    action: () => pushOptions(context, const MyGame()),
-                    child: MyAction(
-                      title: 'Understand',
-                      icon: 'check.png',
-                      height: 40,
-                      width: 300,
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    MyButton(
+                      key: buttonKey,
+                      color: color,
+                      action: () => updateDifficulty(),
+                      child: MySelect(
+                        key: selectKey,
+                        difficulty: difficulty,
+                        icon: 'change.png',
+                        height: 40,
+                        width: 300,
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ),
+                    const SizedBox(height: 10),
+                    MyButton(
+                      action: () =>
+                          pushOptions(context, MyGame(difficulty: difficulty)),
+                      child: const MyAction(
+                        title: 'Understand',
+                        icon: 'check.png',
+                        height: 40,
+                        width: 300,
+                      ),
+                    ),
+                  ],
+                )),
           ),
         ],
       ),
