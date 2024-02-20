@@ -32,8 +32,9 @@ class _MyButtonState extends State<MyButton> {
       } else {
         pushOffset = const Offset(0, 0);
         shadowOffset = const Offset(4, 4);
+        HapticFeedback.vibrate();
+        action();
       }
-      HapticFeedback.vibrate();
     });
   }
 
@@ -44,7 +45,6 @@ class _MyButtonState extends State<MyButton> {
         child: GestureDetector(
             onTapUp: (TapUpDetails tapUpDetails) {
               _updateOffset();
-              action();
             },
             onTapCancel: () {
               _updateOffset();

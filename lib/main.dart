@@ -23,13 +23,17 @@ class MyApp extends StatelessWidget {
         brightness: context.isDark() ? Brightness.dark : Brightness.light,
         textTheme: const TextTheme(
           titleLarge: TextStyle(
-            fontSize: 36.0,
-            height: 1.2,
+            fontSize: 48.0,
+            fontWeight: FontWeight.w900
           ),
           titleMedium: TextStyle(
-            fontSize: 20.0,
+            fontSize: 24.0,
+            fontWeight: FontWeight.w600
           ),
-          bodyMedium: TextStyle(fontSize: 16.0, height: 1.3),
+          bodyMedium: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w600
+          ),
         ),
       ),
       home: const MyHome(

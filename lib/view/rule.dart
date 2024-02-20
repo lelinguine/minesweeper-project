@@ -8,8 +8,32 @@ import 'package:minesweeper/view/component/action.dart';
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/game.dart';
 
-class MyRule extends StatelessWidget {
-  const MyRule({Key? key}) : super(key: key);
+class MyRule extends StatefulWidget {
+  MyRule({Key? key}) : super(key: key);
+
+    @override
+  _MyRuleState createState() => _MyRuleState();
+}
+
+class _MyRuleState extends State<MyRule> {
+  _MyRuleState();
+
+  String difficulty = "Easy";
+
+  void _updateDifficulty() {
+    setState(() {
+      if(difficulty == "Easy")  {
+        difficulty = "Medium";
+      }
+      else if(difficulty == "Medium")  {
+        difficulty = "Hard";
+      }
+      else if(difficulty == "Hard")  {
+        difficulty = "Easy";
+      }
+      print(difficulty);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +57,9 @@ class MyRule extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   MyButton(
-                action: () => pushOptions(context, const MyGame()),
-                child: const MyAction(
-                  title: 'Difficulty',
+                action: () => _updateDifficulty(),
+                child: MyAction(
+                  title: difficulty,
                   icon: 'refresh.png',
                   height: 40,
                   width: 300,
@@ -43,9 +67,8 @@ class MyRule extends StatelessWidget {
               ),
               const SizedBox(height: 10),
                   MyButton(
-                    action: () => Navigator.popUntil(
-                        context, (route) => route.isFirst),
-                    child: const MyAction(
+                    action: () => pushOptions(context, const MyGame()),
+                    child: MyAction(
                       title: 'Understand',
                       icon: 'check.png',
                       height: 40,

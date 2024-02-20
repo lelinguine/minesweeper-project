@@ -36,8 +36,8 @@ class MyHome extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: MyButton(
-                action: () => pushOptions(context, const MyRule()),
-                child: const MyAction(
+                action: () => pushOptions(context, MyRule()),
+                child: MyAction(
                   title: 'New game',
                   icon: 'start.png',
                   height: 40,

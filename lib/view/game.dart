@@ -28,7 +28,7 @@ class _MyGameState extends State<MyGame> {
               alignment: Alignment.bottomCenter,
               child: MyButton(
                     action: () => Navigator.popUntil(context, (route) => route.isFirst),
-                    child: const MyAction(
+                    child: MyAction(
                       title: 'Finish',
                       icon: 'finish.png',
                       height: 40,
