@@ -20,20 +20,20 @@ class MyRuleState extends State<MyRule> {
   MyRuleState();
 
   String difficulty = "Easy";
-  Color color = Color(int.parse('0xFF06d6a0'));
+  Color color = Color(int.parse('0xFF118ab2'));
   GlobalKey<MySelectState> selectKey = GlobalKey();
   GlobalKey<MyButtonState> buttonKey = GlobalKey();
 
   void updateDifficulty() {
     setState(() {
       if (difficulty == "Easy") {
-        color = Color(int.parse('0xFFffd166'));
+        color = Color(int.parse('0xFFf78c6b'));
         difficulty = "Medium";
       } else if (difficulty == "Medium") {
         color = Color(int.parse('0xFFef476f'));
         difficulty = "Hard";
       } else if (difficulty == "Hard") {
-        color = Color(int.parse('0xFF06d6a0'));
+        color = Color(int.parse('0xFF118ab2'));
         difficulty = "Easy";
       }
       buttonKey.currentState?.updateColor(color);
@@ -71,7 +71,7 @@ class MyRuleState extends State<MyRule> {
                         difficulty: difficulty,
                         icon: 'change.png',
                         height: 40,
-                        width: 300,
+                        width: 400,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -82,7 +82,7 @@ class MyRuleState extends State<MyRule> {
                         title: 'Understand',
                         icon: 'check.png',
                         height: 40,
-                        width: 300,
+                        width: 400,
                       ),
                     ),
                   ],

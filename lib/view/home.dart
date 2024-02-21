@@ -41,7 +41,7 @@ class MyHome extends StatelessWidget {
                   title: 'New game',
                   icon: 'start.png',
                   height: 40,
-                  width: 300,
+                  width: 400,
                 ),
               ),
             ),

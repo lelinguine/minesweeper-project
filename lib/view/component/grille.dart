@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/view/component/case.dart';
 
 class MyGrille extends StatelessWidget {
+  const MyGrille({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridView.builder(
-        itemCount: 16,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
+    return GridView.builder(
+        itemCount: 10*10,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 10,
         ),
         itemBuilder: (context, index) {
-          return Container(
-            child: MyCase()
-          );
+          return const MyCase();
         },
-      ),
+      
     );
   }
 }
