@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/context.dart';
+
+import 'package:minesweeper/model/storage.dart';
 
 class MySelect extends StatefulWidget {
   MySelect({
@@ -23,24 +26,38 @@ class MySelect extends StatefulWidget {
 class MySelectState extends State<MySelect> {
   MySelectState();
 
+  MyStorage storage = MyStorage();
+
   String difficulty = "Easy";
-  Color color = Color(int.parse('0xFF06d6a0'));
+  Color color = const Color(0xFF06d6a0);
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        final currentState = widget.buttonKey.currentState;
-        if (currentState != null) {
-          currentState.updateColor(color);
+    _loadData().then((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          final currentState = widget.buttonKey.currentState;
+          if (currentState != null) {
+            currentState.updateColor(Color(color.value));
+          }
         }
-      }
+      });
     });
   }
 
-  Color getColor() {
-    return color;
+  Future<void> _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      difficulty = prefs.getString('difficulty') ?? "Easy";
+      color = Color(prefs.getInt('color') ?? 0xFF06d6a0);
+    });
+  }
+
+  Future<void> _saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('difficulty', difficulty);
+    await prefs.setInt('color', color.value);
   }
 
   String getDifficulty() {
@@ -50,15 +67,17 @@ class MySelectState extends State<MySelect> {
   void updateDifficulty() {
     setState(() {
       if (difficulty == "Easy") {
-        widget.buttonKey.currentState!.updateColor(Color(int.parse('0xFF118ab2')));
         difficulty = "Medium";
+        color = const Color(0xFF118ab2);
       } else if (difficulty == "Medium") {
-        widget.buttonKey.currentState!.updateColor(Color(int.parse('0xFFef476f')));
         difficulty = "Hard";
+        color = const Color(0xFFef476f);
       } else if (difficulty == "Hard") {
-        widget.buttonKey.currentState!.updateColor(Color(int.parse('0xFF06d6a0')));
         difficulty = "Easy";
+        color = const Color(0xFF06d6a0);
       }
+      widget.buttonKey.currentState!.updateColor(color);
+      _saveData();
     });
   }
 

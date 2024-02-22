@@ -1,5 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+
+import 'dart:async';
 
 class MyTimer extends StatefulWidget {
   const MyTimer({Key? key}) : super(key: key);
@@ -9,13 +10,16 @@ class MyTimer extends StatefulWidget {
 }
 
 class MyTimerState extends State<MyTimer> {
+  late Stopwatch _stopwatch;
   late Timer _timer;
-  int _secondsPassed = 0;
+  late Duration _elapsedTime = Duration.zero;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 1), _updateTimer);
+    _stopwatch = Stopwatch();
+    _stopwatch.start();
+    _timer = Timer.periodic(const Duration(milliseconds: 30), _updateTimer);
   }
 
   @override
@@ -25,9 +29,11 @@ class MyTimerState extends State<MyTimer> {
   }
 
   void _updateTimer(Timer timer) {
-    setState(() {
-      _secondsPassed++;
-    });
+    if (_stopwatch.isRunning) {
+      setState(() {
+        _elapsedTime = _stopwatch.elapsed;
+      });
+    }
   }
 
   String _formatDuration(Duration duration) {
@@ -38,14 +44,20 @@ class MyTimerState extends State<MyTimer> {
 
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
+    String twoDigitMilliseconds =
+        twoDigits(duration.inMilliseconds.remainder(1000) ~/ 10);
+    return "$twoDigitMinutes:$twoDigitSeconds.$twoDigitMilliseconds";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      _formatDuration(Duration(seconds: _secondsPassed)),
-      style: const TextStyle(fontSize: 20),
+    return Column(
+      children: [
+        Text(
+          _formatDuration(_elapsedTime),
+          style: const TextStyle(fontSize: 20),
+        ),
+      ],
     );
   }
 }
