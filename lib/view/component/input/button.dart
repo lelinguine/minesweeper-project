@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 class MyButton extends StatefulWidget {
   final Widget child;
   final VoidCallback action;
-  
+
   const MyButton({
     Key? key,
     required this.child,
@@ -20,7 +20,7 @@ class MyButton extends StatefulWidget {
 class MyButtonState extends State<MyButton> {
   late bool isSelected = false;
 
-  late Color? color = Theme.of(context).primaryColor;
+  late Color color = Theme.of(context).primaryColor;
   late Offset pushOffset = const Offset(0, 0);
   late Offset shadowOffset = const Offset(4, 4);
 
@@ -61,7 +61,7 @@ class MyButtonState extends State<MyButton> {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: color,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
               width: 4,

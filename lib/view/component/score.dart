@@ -9,7 +9,7 @@ class MyScore extends StatefulWidget {
 }
 
 class MyScoreState extends State<MyScore> {
-  String score = '';
+  int score = 0;
 
   @override
   void initState() {
@@ -22,14 +22,14 @@ class MyScoreState extends State<MyScore> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('score', newScore);
     setState(() {
-      score = newScore.toString();
+      score = newScore;
     });
   }
 
   Future<void> _loadScore() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      score = prefs.getString('score') ?? '';
+      score = prefs.getInt('score') ?? 0;
     });
   }
 
