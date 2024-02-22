@@ -10,7 +10,7 @@ import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/game.dart';
 
 class MyRule extends StatefulWidget {
-  MyRule({Key? key}) : super(key: key);
+  const MyRule({Key? key}) : super(key: key);
 
   @override
   MyRuleState createState() => MyRuleState();
@@ -20,20 +20,20 @@ class MyRuleState extends State<MyRule> {
   MyRuleState();
 
   String difficulty = "Easy";
-  Color color = Color(int.parse('0xFF118ab2'));
+  Color color = Color(int.parse('0xFF06d6a0'));
   GlobalKey<MySelectState> selectKey = GlobalKey();
   GlobalKey<MyButtonState> buttonKey = GlobalKey();
 
   void updateDifficulty() {
     setState(() {
       if (difficulty == "Easy") {
-        color = Color(int.parse('0xFFf78c6b'));
+        color = Color(int.parse('0xFF118ab2'));
         difficulty = "Medium";
       } else if (difficulty == "Medium") {
         color = Color(int.parse('0xFFef476f'));
         difficulty = "Hard";
       } else if (difficulty == "Hard") {
-        color = Color(int.parse('0xFF118ab2'));
+        color = Color(int.parse('0xFF06d6a0'));
         difficulty = "Easy";
       }
       buttonKey.currentState?.updateColor(color);

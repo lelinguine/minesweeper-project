@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/view/component/input/default.dart';
 import 'package:minesweeper/view/component/grille.dart';
@@ -16,30 +15,28 @@ class MyGame extends StatefulWidget {
 class MyGameState extends State<MyGame> {
   MyGameState();
 
+  MyGrille calculateGridDifficulty(String difficulty) {
+    if (difficulty == 'Easy') {
+      return MyGrille(taille: 4, nbMines: 2);
+    } else if (difficulty == 'Medium') {
+      return MyGrille(taille: 8, nbMines: 4);
+    } else {
+      return MyGrille(taille: 12, nbMines: 8);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Center(child: Container(
+          Center(
+            child: SizedBox(
               width: 400,
               height: 400,
-          // decoration: BoxDecoration(
-          //   color: Theme.of(context).primaryColor,
-          //   borderRadius: BorderRadius.circular(20),
-          //   border: Border.all(
-          //     width: 4,
-          //     color: Theme.of(context).secondaryHeaderColor,
-          //   ),
-          //   boxShadow: [
-          //     BoxShadow(
-          //       color: Theme.of(context).secondaryHeaderColor,
-          //       offset: const Offset(4, 4),
-          //     ),
-          //   ],
-          // ),
-          child: MyGrille(),
-        ),),
+              child: calculateGridDifficulty(widget.difficulty),
+            ),
+          ),
           Container(
             margin: const EdgeInsets.only(bottom: 20.0),
             child: Align(
