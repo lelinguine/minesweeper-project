@@ -4,14 +4,13 @@ import 'package:minesweeper/context.dart';
 
 import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/view/component/input/default.dart';
+import 'package:minesweeper/view/component/score.dart';
 
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/rule.dart';
 
 class MyHome extends StatelessWidget {
-  const MyHome({Key? key, required this.score}) : super(key: key);
-
-  final String score;
+  const MyHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +25,7 @@ class MyHome extends StatelessWidget {
                   context.customTitle,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                Text("${score}pts",
-                    style: Theme.of(context).textTheme.titleMedium),
+                const MyScore(),
               ],
             ),
           ),

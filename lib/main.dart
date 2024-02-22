@@ -37,9 +37,7 @@ class MyApp extends StatelessWidget {
               color: context.isDark() ? Colors.white : Colors.black),
         ),
       ),
-      home: const MyHome(
-        score: '0',
-      ),
+      home: const MyHome(),
     );
   }
 }

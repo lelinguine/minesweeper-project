@@ -9,41 +9,17 @@ import 'package:minesweeper/view/component/input/select.dart';
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/game.dart';
 
-class MyRule extends StatefulWidget {
-  const MyRule({Key? key}) : super(key: key);
-
-  @override
-  MyRuleState createState() => MyRuleState();
-}
-
-class MyRuleState extends State<MyRule> {
-  MyRuleState();
-
-  String difficulty = "Easy";
-  Color color = Color(int.parse('0xFF06d6a0'));
-  GlobalKey<MySelectState> selectKey = GlobalKey();
-  GlobalKey<MyButtonState> buttonKey = GlobalKey();
-
-  void updateDifficulty() {
-    setState(() {
-      if (difficulty == "Easy") {
-        color = Color(int.parse('0xFF118ab2'));
-        difficulty = "Medium";
-      } else if (difficulty == "Medium") {
-        color = Color(int.parse('0xFFef476f'));
-        difficulty = "Hard";
-      } else if (difficulty == "Hard") {
-        color = Color(int.parse('0xFF06d6a0'));
-        difficulty = "Easy";
-      }
-      buttonKey.currentState?.updateColor(color);
-      selectKey.currentState?.updateDifficulty(difficulty);
-    });
-  }
+class MyRule extends StatelessWidget {
+  final GlobalKey<MySelectState> selectKey = GlobalKey();
+  final GlobalKey<MyButtonState> buttonKey = GlobalKey();
+  MyRule({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
       body: Stack(
         children: [
           Align(
@@ -64,11 +40,10 @@ class MyRuleState extends State<MyRule> {
                   children: [
                     MyButton(
                       key: buttonKey,
-                      color: color,
-                      action: () => updateDifficulty(),
+                      action: () => selectKey.currentState!.updateDifficulty(),
                       child: MySelect(
+                        buttonKey: buttonKey,
                         key: selectKey,
-                        difficulty: difficulty,
                         icon: 'change.png',
                         height: 40,
                         width: 400,
@@ -77,7 +52,7 @@ class MyRuleState extends State<MyRule> {
                     const SizedBox(height: 10),
                     MyButton(
                       action: () =>
-                          pushOptions(context, MyGame(difficulty: difficulty)),
+                          pushOptions(context, MyGame(difficulty: selectKey.currentState!.getDifficulty())),
                       child: const MyAction(
                         title: 'Understand',
                         icon: 'check.png',

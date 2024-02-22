@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/model/class/case.dart';
 
 class MyCase extends StatelessWidget {
-  final Case currentCase; // Ajout de l'attribut case
+  final Case currentCase;
 
-  const MyCase({Key? key, required this.currentCase}) : super(key: key); // Utilisation de l'attribut case dans le constructeur
+  const MyCase({Key? key, required this.currentCase}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class MyCase extends StatelessWidget {
       onTapDown: (TapDownDetails tapDownDetails) {},
       child: Center(
         child: Text(
-          currentCase.nbMinesAutour.toString(), // Convertir en String
+          currentCase.nbMinesAutour.toString(),
         ),
       ),
     );

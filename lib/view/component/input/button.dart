@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MyButton extends StatefulWidget {
-  MyButton({
+  final Widget child;
+  final VoidCallback action;
+  
+  const MyButton({
     Key? key,
-    this.color,
     required this.child,
     required this.action,
   }) : super(key: key);
-
-  final Widget child;
-  final VoidCallback action;
-  final Color? color;
 
   @override
   MyButtonState createState() => MyButtonState();
@@ -21,15 +19,10 @@ class MyButton extends StatefulWidget {
 
 class MyButtonState extends State<MyButton> {
   late bool isSelected = false;
-  late Color? color;
+
+  late Color? color = Theme.of(context).primaryColor;
   late Offset pushOffset = const Offset(0, 0);
   late Offset shadowOffset = const Offset(4, 4);
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    color = widget.color ?? Theme.of(context).primaryColor;
-  }
 
   void updateColor(Color newColor) {
     setState(() {

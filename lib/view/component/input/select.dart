@@ -1,31 +1,64 @@
 import 'package:flutter/material.dart';
 
+import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/context.dart';
 
 class MySelect extends StatefulWidget {
-  const MySelect({
+  MySelect({
     Key? key,
-    required this.difficulty,
+    required this.buttonKey,
     required this.icon,
     required this.height,
     required this.width,
   }) : super(key: key);
 
-  final String difficulty, icon;
+  final String icon;
   final double height, width;
+  GlobalKey<MyButtonState> buttonKey = GlobalKey();
 
   @override
-  MySelectState createState() => MySelectState(difficulty: difficulty);
+  MySelectState createState() => MySelectState();
 }
 
 class MySelectState extends State<MySelect> {
-  MySelectState({required this.difficulty});
+  MySelectState();
 
-  String difficulty;
+  String difficulty = "Easy";
+  Color color = Color(int.parse('0xFF06d6a0'));
 
-  void updateDifficulty(String tmp) {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        final currentState = widget.buttonKey.currentState;
+        if (currentState != null) {
+          currentState.updateColor(color);
+        }
+      }
+    });
+  }
+
+  Color getColor() {
+    return color;
+  }
+
+  String getDifficulty() {
+    return difficulty;
+  }
+
+  void updateDifficulty() {
     setState(() {
-      difficulty = tmp;
+      if (difficulty == "Easy") {
+        widget.buttonKey.currentState!.updateColor(Color(int.parse('0xFF118ab2')));
+        difficulty = "Medium";
+      } else if (difficulty == "Medium") {
+        widget.buttonKey.currentState!.updateColor(Color(int.parse('0xFFef476f')));
+        difficulty = "Hard";
+      } else if (difficulty == "Hard") {
+        widget.buttonKey.currentState!.updateColor(Color(int.parse('0xFF06d6a0')));
+        difficulty = "Easy";
+      }
     });
   }
 
