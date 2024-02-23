@@ -11,8 +11,7 @@ import 'package:minesweeper/view/game.dart';
 
 class MyRule extends StatelessWidget {
   final GlobalKey<MySelectState> selectKey = GlobalKey();
-  final GlobalKey<MyButtonState> buttonKey = GlobalKey();
-  MyRule({Key? key}) : super(key: key);
+  MyRule({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +38,8 @@ class MyRule extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     MyButton(
-                      key: buttonKey,
                       action: () => selectKey.currentState!.updateDifficulty(),
                       child: MySelect(
-                        buttonKey: buttonKey,
                         key: selectKey,
                         icon: 'change.png',
                         height: 40,

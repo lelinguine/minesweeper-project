@@ -4,6 +4,8 @@ import 'package:minesweeper/view/component/input/default.dart';
 import 'package:minesweeper/view/component/grille.dart';
 import 'package:minesweeper/view/component/timer.dart';
 
+import 'package:minesweeper/data/storage.dart';
+
 class MyGame extends StatefulWidget {
   const MyGame({Key? key, required this.difficulty}) : super(key: key);
 
@@ -14,6 +16,8 @@ class MyGame extends StatefulWidget {
 }
 
 class MyGameState extends State<MyGame> {
+
+  MyStorage storage = MyStorage();
 
   MyGrille calculateGridDifficulty(String difficulty) {
     if (difficulty == 'Easy') {

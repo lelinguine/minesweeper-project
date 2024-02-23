@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:minesweeper/data/storage.dart';
 
 class MyScore extends StatefulWidget {
   const MyScore({Key? key}) : super(key: key);
@@ -9,27 +10,21 @@ class MyScore extends StatefulWidget {
 }
 
 class MyScoreState extends State<MyScore> {
+
+  MyStorage storage = MyStorage();
+
   int score = 0;
 
   @override
   void initState() {
     super.initState();
-    _saveScore(28);
-    _loadScore();
-  }
 
-  Future<void> _saveScore(int newScore) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('score', newScore);
-    setState(() {
-      score = newScore;
-    });
-  }
+    storage.saveStorageInt('score', 28);
 
-  Future<void> _loadScore() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      score = prefs.getInt('score') ?? 0;
+    storage.loadStorageInt('score').then((value) {
+      setState(() {
+        score = value;
+      });
     });
   }
 

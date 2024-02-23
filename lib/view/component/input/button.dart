@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, no_logic_in_create_state
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -8,10 +6,10 @@ class MyButton extends StatefulWidget {
   final VoidCallback action;
 
   const MyButton({
-    Key? key,
+    super.key,
     required this.child,
     required this.action,
-  }) : super(key: key);
+  });
 
   @override
   MyButtonState createState() => MyButtonState();
@@ -20,15 +18,8 @@ class MyButton extends StatefulWidget {
 class MyButtonState extends State<MyButton> {
   late bool isSelected = false;
 
-  late Color color = Theme.of(context).primaryColor;
   late Offset pushOffset = const Offset(0, 0);
   late Offset shadowOffset = const Offset(4, 4);
-
-  void updateColor(Color newColor) {
-    setState(() {
-      color = newColor;
-    });
-  }
 
   void updateOffset() {
     setState(() {

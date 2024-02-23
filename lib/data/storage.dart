@@ -21,4 +21,9 @@ class MyStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(setting) ?? '';
   }
+
+  Future<void> clearLocalStorage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 }

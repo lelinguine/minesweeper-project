@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/context.dart';
-
-import 'package:minesweeper/model/storage.dart';
+import 'package:minesweeper/data/storage.dart';
 
 class MySelect extends StatefulWidget {
-  MySelect({
-    Key? key,
-    required this.buttonKey,
+  const MySelect({
+    super.key,
     required this.icon,
     required this.height,
     required this.width,
-  }) : super(key: key);
+  });
 
   final String icon;
   final double height, width;
-  GlobalKey<MyButtonState> buttonKey = GlobalKey();
 
   @override
   MySelectState createState() => MySelectState();
@@ -34,30 +29,18 @@ class MySelectState extends State<MySelect> {
   @override
   void initState() {
     super.initState();
-    _loadData().then((_) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          final currentState = widget.buttonKey.currentState;
-          if (currentState != null) {
-            currentState.updateColor(Color(color.value));
-          }
-        }
+
+    storage.loadStorageString('difficulty').then((value) {
+      setState(() {
+        difficulty = value;
       });
     });
-  }
 
-  Future<void> _loadData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      difficulty = prefs.getString('difficulty') ?? "Easy";
-      color = Color(prefs.getInt('color') ?? 0xFF06d6a0);
+    storage.loadStorageInt('color').then((value) {
+      setState(() {
+        color = Color(value);
+      });
     });
-  }
-
-  Future<void> _saveData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('difficulty', difficulty);
-    await prefs.setInt('color', color.value);
   }
 
   String getDifficulty() {
@@ -76,38 +59,42 @@ class MySelectState extends State<MySelect> {
         difficulty = "Easy";
         color = const Color(0xFF06d6a0);
       }
-      widget.buttonKey.currentState!.updateColor(color);
-      _saveData();
+      storage.saveStorageString('difficulty', difficulty);
+      storage.saveStorageInt('color', color.value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height,
-      width: widget.width,
-      child: Stack(
-        children: [
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(difficulty,
-                    style: Theme.of(context).textTheme.titleMedium),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(right: 10.0),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Image.asset(
-                context.getAssets() + widget.icon,
-                height: 18,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: Container(
+        height: widget.height,
+        width: widget.width,
+        color: color,
+        child: Stack(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(difficulty,
+                      style: Theme.of(context).textTheme.titleMedium),
+                ],
               ),
             ),
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.only(right: 10.0),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Image.asset(
+                  context.getAssets() + widget.icon,
+                  height: 18,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
