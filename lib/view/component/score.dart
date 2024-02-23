@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/data/storage.dart';
 
 class MyScore extends StatefulWidget {
-  const MyScore({Key? key}) : super(key: key);
+  const MyScore({super.key});
 
   @override
   MyScoreState createState() => MyScoreState();
@@ -18,6 +18,8 @@ class MyScoreState extends State<MyScore> {
   @override
   void initState() {
     super.initState();
+
+    storage.clearLocalStorage();
 
     storage.saveStorageInt('score', 28);
 

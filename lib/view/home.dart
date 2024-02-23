@@ -10,7 +10,7 @@ import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/rule.dart';
 
 class MyHome extends StatelessWidget {
-  const MyHome({Key? key}) : super(key: key);
+  const MyHome({super.key});
 
   @override
   Widget build(BuildContext context) {
