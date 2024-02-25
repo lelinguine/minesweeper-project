@@ -32,13 +32,13 @@ class MySelectState extends State<MySelect> {
 
     storage.loadStorageString('difficulty').then((value) {
       setState(() {
-        difficulty = value;
+        difficulty = value == '' ? "Easy" : value;
       });
     });
 
     storage.loadStorageInt('color').then((value) {
       setState(() {
-        color = Color(value);
+        color = value == 0 ? const Color(0xFF06d6a0) : Color(value);
       });
     });
   }

@@ -10,7 +10,6 @@ class MyScore extends StatefulWidget {
 }
 
 class MyScoreState extends State<MyScore> {
-
   MyStorage storage = MyStorage();
 
   int score = 0;
@@ -18,8 +17,6 @@ class MyScoreState extends State<MyScore> {
   @override
   void initState() {
     super.initState();
-
-    storage.clearLocalStorage();
 
     storage.saveStorageInt('score', 28);
 

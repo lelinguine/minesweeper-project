@@ -14,14 +14,13 @@ class MyGame extends StatefulWidget {
 }
 
 class MyGameState extends State<MyGame> {
-
   MyGrille calculateGridDifficulty(String difficulty) {
     if (difficulty == 'Easy') {
-      return MyGrille(taille: 4, nbMines: 2);
+      return const MyGrille(taille: 4, nbMines: 1);
     } else if (difficulty == 'Medium') {
-      return MyGrille(taille: 8, nbMines: 4);
+      return const MyGrille(taille: 8, nbMines: 4);
     } else {
-      return MyGrille(taille: 12, nbMines: 8);
+      return const MyGrille(taille: 8, nbMines: 8);
     }
   }
 
@@ -52,15 +51,15 @@ class MyGameState extends State<MyGame> {
                     const MyTimer(),
                     const SizedBox(height: 10),
                     MyButton(
-                action: () =>
-                    Navigator.popUntil(context, (route) => route.isFirst),
-                child: const MyAction(
-                  title: 'Leave',
-                  icon: 'finish.png',
-                  height: 40,
-                  width: 400,
-                ),
-              ),
+                      action: () =>
+                          Navigator.popUntil(context, (route) => route.isFirst),
+                      child: const MyAction(
+                        title: 'Leave',
+                        icon: 'finish.png',
+                        height: 40,
+                        width: 400,
+                      ),
+                    ),
                   ],
                 )),
           ),

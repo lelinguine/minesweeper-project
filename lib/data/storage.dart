@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyStorage with ChangeNotifier {
-  
   Future<void> saveStorageInt(String setting, int value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt(setting, value);

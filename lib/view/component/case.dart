@@ -13,10 +13,25 @@ class MyCase extends StatelessWidget {
       onTapCancel: () {},
       onTapDown: (TapDownDetails tapDownDetails) {},
       child: Center(
-        child: Text(
-          currentCase.nbMinesAutour.toString(),
-        ),
+        child: _buildContent(),
       ),
     );
+  }
+
+  Widget _buildContent() {
+    if (currentCase.etat == Etat.decouverte) {
+      // Si la case est découverte
+      if (currentCase.minee) {
+        // Si la case est minée
+        return Icon(Icons.dangerous); // Afficher une icône de mine
+      } else {
+        return Text(
+          currentCase.nbMinesAutour.toString(),
+          style: TextStyle(fontSize: 20),
+        ); // Afficher le nombre de mines autour
+      }
+    } else {
+      return Container(); // Case non découverte, ne rien afficher
+    }
   }
 }
