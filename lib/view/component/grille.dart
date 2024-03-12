@@ -3,16 +3,29 @@ import 'dart:math';
 import 'package:minesweeper/view/component/case.dart';
 import 'package:minesweeper/model/class/grille.dart';
 import 'package:minesweeper/model/class/case.dart';
+import 'package:minesweeper/model/class/coup.dart';
 
-class MyGrille extends StatelessWidget {
+class MyGrille extends StatefulWidget {
   final int taille, nbMines;
+  // final VoidCallback onGameState;
 
   const MyGrille({super.key, required this.taille, required this.nbMines});
 
   @override
-  Widget build(BuildContext context) {
-    Grille grille = Grille(taille: taille, nbMines: nbMines);
+  MyGrilleState createState() => MyGrilleState();
+}
 
+class MyGrilleState extends State<MyGrille> {
+  late Grille grille;
+
+  @override
+  void initState() {
+    super.initState();
+    grille = Grille(taille: widget.taille, nbMines: widget.nbMines);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
@@ -23,57 +36,46 @@ class MyGrille extends StatelessWidget {
         ),
       ),
       child: GridView.builder(
-        itemCount: pow(taille, 2).toInt(),
+        itemCount: pow(widget.taille, 2).toInt(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: taille,
+          crossAxisCount: widget.taille,
         ),
         itemBuilder: (context, index) {
-          int row = (index / taille).floor();
-          int col = index % taille;
+          int row = (index / widget.taille).floor();
+          int col = index % widget.taille;
           Coordonnees coord = (ligne: row, colonne: col);
           Case currentCase = grille.getCase(coord);
-          return _buildCaseWidget(context, currentCase, row, col);
+          return MyCase(
+            currentCase: currentCase,
+            onTap: () {
+              _onCaseTap(row, col);
+            },
+            isFirstRow: row == 0,
+            isLastRow: row == widget.taille - 1,
+            isFirstColumn: col == 0,
+            isLastColumn: col == widget.taille - 1,
+          );
         },
       ),
     );
   }
 
-  Widget _buildCaseWidget(
-      BuildContext context, Case currentCase, int row, int col) {
-    BorderRadius borderRadius;
+  void _onCaseTap(int row, int col) {
+    setState(() {
+      Coordonnees coord = (ligne: row, colonne: col);
 
-    if (row == 0 && col == 0) {
-      borderRadius = const BorderRadius.only(
-        topLeft: Radius.circular(18),
-      );
-    } else if (row == 0 && col == taille - 1) {
-      borderRadius = const BorderRadius.only(
-        topRight: Radius.circular(18),
-      );
-    } else if (row == taille - 1 && col == 0) {
-      borderRadius = const BorderRadius.only(
-        bottomLeft: Radius.circular(18),
-      );
-    } else if (row == taille - 1 && col == taille - 1) {
-      borderRadius = const BorderRadius.only(
-        bottomRight: Radius.circular(18),
-      );
-    } else {
-      borderRadius = BorderRadius.zero;
-    }
+      Coup coup = Coup(row, col, Actionn.decouvrir);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        border: Border.all(
-          width: 2,
-          color: Theme.of(context).secondaryHeaderColor,
-        ),
-        borderRadius: borderRadius,
-      ),
-      child: MyCase(
-        currentCase: currentCase,
-      ),
-    );
+      grille.decouvrirVoisines(coord);
+
+      if (grille.isFinie(coup)) {
+        print("Partie finie");
+      } else {
+        print("Partie en cours...");
+      }
+
+      Case tappedCase = grille.getCase(coord);
+      tappedCase.etat = Etat.decouverte;
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/view/component/input/default.dart';
 import 'package:minesweeper/view/component/grille.dart';
 import 'package:minesweeper/view/component/timer.dart';
+import 'package:minesweeper/view/component/status.dart';
 
 class MyGame extends StatefulWidget {
   const MyGame({super.key, required this.difficulty});
@@ -14,6 +15,8 @@ class MyGame extends StatefulWidget {
 }
 
 class MyGameState extends State<MyGame> {
+  late int score;
+
   MyGrille calculateGridDifficulty(String difficulty) {
     if (difficulty == 'Easy') {
       return const MyGrille(taille: 4, nbMines: 1);
@@ -33,10 +36,15 @@ class MyGameState extends State<MyGame> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const MyStatus(),
                 SizedBox(
                   width: 400,
                   height: 400,
                   child: calculateGridDifficulty(widget.difficulty),
+                ),
+                Text(
+                  '0',
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ],
             ),

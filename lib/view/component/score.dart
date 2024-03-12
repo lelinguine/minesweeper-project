@@ -18,8 +18,6 @@ class MyScoreState extends State<MyScore> {
   void initState() {
     super.initState();
 
-    storage.saveStorageInt('score', 28);
-
     storage.loadStorageInt('score').then((value) {
       setState(() {
         score = value;
@@ -30,7 +28,7 @@ class MyScoreState extends State<MyScore> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      "${score}pts",
+      score != 0 ? "${score}pts" : "",
       style: Theme.of(context).textTheme.titleMedium,
     );
   }

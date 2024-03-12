@@ -1,12 +1,12 @@
 import 'package:minesweeper/model/class/case.dart';
 
-/// [Action] qu'on peut jouer sur une [Case]
-enum Action { decouvrir, marquer }
+/// [Actionn] qu'on peut jouer sur une [Case]
+enum Actionn { decouvrir, marquer }
 
 /// [Coup] joué
 class Coup {
   Coordonnees coordonnees;
-  Action action;
+  Actionn action;
 
   Coup(int lig, int col, this.action)
       : coordonnees = (ligne: lig, colonne: col);

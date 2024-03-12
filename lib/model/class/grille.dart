@@ -98,9 +98,9 @@ class Grille {
   void mettreAJour(Coup coup) {
     Coordonnees coord =
         (ligne: coup.coordonnees.ligne, colonne: coup.coordonnees.colonne);
-    if (coup.action == Action.decouvrir) {
+    if (coup.action == Actionn.decouvrir) {
       decouvrirVoisines(coord);
-    } else if (coup.action == Action.marquer) {
+    } else if (coup.action == Actionn.marquer) {
       Case init = getCase(coord);
       init.etat = Etat.marquee;
     }
@@ -120,9 +120,10 @@ class Grille {
 
   /// Renvoie vrai si [Grille] comporte au moins une case minée et découverte
   bool isPerdue(Coup coup) {
-    Coordonnees coord = (ligne: coup.coordonnees.ligne, colonne: coup.coordonnees.colonne);
+    Coordonnees coord =
+        (ligne: coup.coordonnees.ligne, colonne: coup.coordonnees.colonne);
     Case init = getCase(coord);
-    if(init.minee)  {
+    if (init.minee) {
       return true;
     }
     return false;
@@ -130,7 +131,7 @@ class Grille {
 
   /// Renvoie vrai si la partie est finie, gagnée ou perdue
   bool isFinie(Coup coup) {
-    if(isPerdue(coup) || isGagnee())  {
+    if (isPerdue(coup) || isGagnee()) {
       return true;
     }
     return false;

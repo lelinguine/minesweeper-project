@@ -82,7 +82,7 @@ Future<Coup> saisirCoup(int taille) async {
     action = (await saisirLigne()).toLowerCase();
   } while (action != 'd' && action != 'm');
   return Coup(ligne, colonne,
-      (action == 'd' || action == 'D') ? Action.decouvrir : Action.marquer);
+      (action == 'd' || action == 'D') ? Actionn.decouvrir : Actionn.marquer);
 }
 
 /// - Affiche sur [stdout] la [grille]
