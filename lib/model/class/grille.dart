@@ -85,7 +85,9 @@ class Grille {
   /// - La case située à [coord] doit être découverte
   void decouvrirVoisines(Coordonnees coord) {
     Case init = getCase(coord);
-    init.etat = Etat.decouverte;
+    if (init.etat != Etat.marquee) {
+      init.etat = Etat.decouverte;
+    }
     if (init.nbMinesAutour == 0) {
       List<Coordonnees> listeVoisines = getVoisines(coord);
       for (Coordonnees coord in listeVoisines) {
@@ -123,7 +125,7 @@ class Grille {
     Coordonnees coord =
         (ligne: coup.coordonnees.ligne, colonne: coup.coordonnees.colonne);
     Case init = getCase(coord);
-    if (init.minee) {
+    if (init.minee && init.etat != Etat.marquee) {
       return true;
     }
     return false;

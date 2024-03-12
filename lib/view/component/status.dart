@@ -8,7 +8,7 @@ class MyStatus extends StatefulWidget {
 }
 
 class MyStatusState extends State<MyStatus> {
-  late String status = 'You win!';
+  late String status = '';
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,13 @@ class MyStatusState extends State<MyStatus> {
     );
   }
 
-  void _OnGameVictory() {
+  void onGameVictory() {
     setState(() {
       status = 'You won!';
     });
   }
 
-  void _OnGameLose() {
+  void onGameLose() {
     setState(() {
       status = 'You lose!';
     });

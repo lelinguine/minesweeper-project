@@ -4,7 +4,7 @@ import 'package:minesweeper/context.dart';
 
 import 'package:minesweeper/view/component/input/button.dart';
 import 'package:minesweeper/view/component/input/default.dart';
-import 'package:minesweeper/view/component/score.dart';
+import 'package:minesweeper/view/component/info.dart';
 
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/rule.dart';
@@ -25,7 +25,7 @@ class MyHome extends StatelessWidget {
                   context.customTitle,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                const MyScore(),
+                const MyInfo(),
               ],
             ),
           ),

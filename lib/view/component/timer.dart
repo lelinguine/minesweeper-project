@@ -10,15 +10,15 @@ class MyTimer extends StatefulWidget {
 }
 
 class MyTimerState extends State<MyTimer> {
-  late Stopwatch _stopwatch;
+  late Stopwatch stopwatch;
   late Timer _timer;
   late Duration _elapsedTime = Duration.zero;
 
   @override
   void initState() {
     super.initState();
-    _stopwatch = Stopwatch();
-    _stopwatch.start();
+    stopwatch = Stopwatch();
+    stopwatch.start();
     _timer = Timer.periodic(const Duration(milliseconds: 30), _updateTimer);
   }
 
@@ -29,11 +29,17 @@ class MyTimerState extends State<MyTimer> {
   }
 
   void _updateTimer(Timer timer) {
-    if (_stopwatch.isRunning) {
+    if (stopwatch.isRunning) {
       setState(() {
-        _elapsedTime = _stopwatch.elapsed;
+        _elapsedTime = stopwatch.elapsed;
       });
     }
+  }
+
+  void stopTimer() {
+    setState(() {
+      stopwatch.stop();
+    });
   }
 
   String _formatDuration(Duration duration) {

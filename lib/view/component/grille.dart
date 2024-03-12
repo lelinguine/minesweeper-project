@@ -6,10 +6,17 @@ import 'package:minesweeper/model/class/case.dart';
 import 'package:minesweeper/model/class/coup.dart';
 
 class MyGrille extends StatefulWidget {
-  final int taille, nbMines;
-  // final VoidCallback onGameState;
+  final String difficulty;
+  final VoidCallback winState;
+  final VoidCallback loseState;
+  final VoidCallback stopWatch;
 
-  const MyGrille({super.key, required this.taille, required this.nbMines});
+  const MyGrille(
+      {super.key,
+      required this.difficulty,
+      required this.winState,
+      required this.loseState,
+      required this.stopWatch});
 
   @override
   MyGrilleState createState() => MyGrilleState();
@@ -17,11 +24,23 @@ class MyGrille extends StatefulWidget {
 
 class MyGrilleState extends State<MyGrille> {
   late Grille grille;
+  late int taille, nbMines;
+  late bool isFinie = false;
 
   @override
   void initState() {
     super.initState();
-    grille = Grille(taille: widget.taille, nbMines: widget.nbMines);
+    if (widget.difficulty == 'Easy') {
+      taille = 4;
+      nbMines = 1;
+    } else if (widget.difficulty == 'Medium') {
+      taille = 8;
+      nbMines = 4;
+    } else {
+      taille = 8;
+      nbMines = 8;
+    }
+    grille = Grille(taille: taille, nbMines: nbMines);
   }
 
   @override
@@ -36,46 +55,61 @@ class MyGrilleState extends State<MyGrille> {
         ),
       ),
       child: GridView.builder(
-        itemCount: pow(widget.taille, 2).toInt(),
+        itemCount: pow(taille, 2).toInt(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: widget.taille,
+          crossAxisCount: taille,
         ),
         itemBuilder: (context, index) {
-          int row = (index / widget.taille).floor();
-          int col = index % widget.taille;
+          int row = (index / taille).floor();
+          int col = index % taille;
           Coordonnees coord = (ligne: row, colonne: col);
           Case currentCase = grille.getCase(coord);
           return MyCase(
             currentCase: currentCase,
             onTap: () {
-              _onCaseTap(row, col);
+              _onCaseTap(row, col, Actionn.decouvrir);
+            },
+            onPressed: () {
+              _onCaseTap(row, col, Actionn.marquer);
             },
             isFirstRow: row == 0,
-            isLastRow: row == widget.taille - 1,
+            isLastRow: row == taille - 1,
             isFirstColumn: col == 0,
-            isLastColumn: col == widget.taille - 1,
+            isLastColumn: col == taille - 1,
           );
         },
       ),
     );
   }
 
-  void _onCaseTap(int row, int col) {
+  void _onCaseTap(int row, int col, Actionn action) {
     setState(() {
-      Coordonnees coord = (ligne: row, colonne: col);
+      if (!isFinie) {
+        Coordonnees coord = (ligne: row, colonne: col);
+        Coup coup = Coup(row, col, action);
+        Case tappedCase = grille.getCase(coord);
 
-      Coup coup = Coup(row, col, Actionn.decouvrir);
+        if (action == Actionn.marquer && tappedCase.etat != Etat.decouverte) {
+          tappedCase.etat = Etat.marquee;
+        } else if (action == Actionn.decouvrir &&
+            tappedCase.etat != Etat.marquee) {
+          tappedCase.etat = Etat.decouverte;
 
-      grille.decouvrirVoisines(coord);
+          grille.decouvrirVoisines(coord);
+        }
 
-      if (grille.isFinie(coup)) {
-        print("Partie finie");
-      } else {
-        print("Partie en cours...");
+        if (grille.isPerdue(coup)) {
+          widget.stopWatch();
+          widget.loseState();
+          isFinie = true;
+        } else {
+          if (grille.isGagnee()) {
+            widget.stopWatch();
+            widget.winState();
+            isFinie = true;
+          }
+        }
       }
-
-      Case tappedCase = grille.getCase(coord);
-      tappedCase.etat = Etat.decouverte;
     });
   }
 }

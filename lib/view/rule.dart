@@ -48,8 +48,11 @@ class MyRule extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     MyButton(
-                      action: () =>
-                          pushOptions(context, MyGame(difficulty: selectKey.currentState!.getDifficulty())),
+                      action: () => pushOptions(
+                          context,
+                          MyGame(
+                              difficulty:
+                                  selectKey.currentState!.getDifficulty())),
                       child: const MyAction(
                         title: 'Understand',
                         icon: 'check.png',

@@ -4,28 +4,16 @@ import 'package:minesweeper/view/component/input/default.dart';
 import 'package:minesweeper/view/component/grille.dart';
 import 'package:minesweeper/view/component/timer.dart';
 import 'package:minesweeper/view/component/status.dart';
+import 'package:minesweeper/view/component/score.dart';
 
-class MyGame extends StatefulWidget {
-  const MyGame({super.key, required this.difficulty});
+class MyGame extends StatelessWidget {
+  final GlobalKey<MyStatusState> statusKey = GlobalKey();
+  final GlobalKey<MyTimerState> timerKey = GlobalKey();
+
+  MyGame({super.key, required this.difficulty});
 
   final String difficulty;
-
-  @override
-  MyGameState createState() => MyGameState();
-}
-
-class MyGameState extends State<MyGame> {
-  late int score;
-
-  MyGrille calculateGridDifficulty(String difficulty) {
-    if (difficulty == 'Easy') {
-      return const MyGrille(taille: 4, nbMines: 1);
-    } else if (difficulty == 'Medium') {
-      return const MyGrille(taille: 8, nbMines: 4);
-    } else {
-      return const MyGrille(taille: 8, nbMines: 8);
-    }
-  }
+  final int score = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +24,17 @@ class MyGameState extends State<MyGame> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const MyStatus(),
+                MyStatus(key: statusKey),
                 SizedBox(
-                  width: 400,
-                  height: 400,
-                  child: calculateGridDifficulty(widget.difficulty),
-                ),
-                Text(
-                  '0',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+                    width: 400,
+                    height: 400,
+                    child: MyGrille(
+                      difficulty: difficulty,
+                      winState: () => statusKey.currentState!.onGameVictory(),
+                      loseState: () => statusKey.currentState!.onGameLose(),
+                      stopWatch: () => timerKey.currentState!.stopTimer(),
+                    )),
+                const MyScore(),
               ],
             ),
           ),
@@ -56,7 +45,7 @@ class MyGameState extends State<MyGame> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const MyTimer(),
+                    MyTimer(key: timerKey),
                     const SizedBox(height: 10),
                     MyButton(
                       action: () =>

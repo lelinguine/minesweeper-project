@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/model/class/case.dart';
 
+import 'package:minesweeper/context.dart';
+
 class MyCase extends StatelessWidget {
   final Case currentCase;
   final VoidCallback onTap;
+  final VoidCallback onPressed;
   final bool isFirstRow;
   final bool isLastRow;
   final bool isFirstColumn;
@@ -14,6 +17,7 @@ class MyCase extends StatelessWidget {
     Key? widgetKey,
     required this.currentCase,
     required this.onTap,
+    required this.onPressed,
     required this.isFirstRow,
     required this.isLastRow,
     required this.isFirstColumn,
@@ -44,6 +48,7 @@ class MyCase extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
+      onLongPress: onPressed,
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
@@ -54,18 +59,21 @@ class MyCase extends StatelessWidget {
           borderRadius: borderRadius,
         ),
         child: Center(
-          child: _buildContent(),
+          child: _buildContent(context),
         ),
       ),
     );
   }
 
-  Widget _buildContent() {
-    Color textColor = Colors.black;
+  Widget _buildContent(BuildContext context) {
+    Color textColor = Theme.of(context).secondaryHeaderColor;
     int nbMines = currentCase.nbMinesAutour;
     if (currentCase.etat == Etat.decouverte) {
       if (currentCase.minee) {
-        return const Icon(Icons.dangerous);
+        return Image.asset(
+          "${context.getAssets()}/bomb.png",
+          height: 18,
+        );
       } else {
         if (nbMines > 0) {
           if (nbMines == 1) {
@@ -81,6 +89,8 @@ class MyCase extends StatelessWidget {
           style: TextStyle(fontSize: 20, color: textColor),
         );
       }
+    } else if (currentCase.etat == Etat.marquee) {
+      return const Icon(Icons.flag);
     } else {
       return Container();
     }
