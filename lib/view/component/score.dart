@@ -10,6 +10,9 @@ class MyScore extends StatefulWidget {
 class MyScoreState extends State<MyScore> {
   int score = 0;
 
+  int time = 0;
+  int timeLimit = 0;
+
   @override
   void initState() {
     super.initState();

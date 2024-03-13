@@ -32,13 +32,13 @@ class MyGrilleState extends State<MyGrille> {
     super.initState();
     if (widget.difficulty == 'Easy') {
       taille = 4;
-      nbMines = 1;
+      nbMines = 2;
     } else if (widget.difficulty == 'Medium') {
-      taille = 8;
+      taille = 6;
       nbMines = 4;
     } else {
       taille = 8;
-      nbMines = 8;
+      nbMines = 12;
     }
     grille = Grille(taille: taille, nbMines: nbMines);
   }
