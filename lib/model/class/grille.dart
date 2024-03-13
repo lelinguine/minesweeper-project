@@ -76,6 +76,9 @@ class Grille {
           if (_grille[coord.ligne][coord.colonne].minee) {
             _grille[lig][col].nbMinesAutour++;
           }
+          if(_grille[lig][col].minee){
+            _grille[lig][col].nbMinesAutour = 999;
+          }
         }
       }
     }

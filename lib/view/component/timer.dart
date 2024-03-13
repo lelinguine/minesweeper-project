@@ -42,6 +42,8 @@ class MyTimerState extends State<MyTimer> {
     });
   }
 
+  int get chronoValue => _elapsedTime.inMilliseconds;
+
   String _formatDuration(Duration duration) {
     String twoDigits(int n) {
       if (n >= 10) return "$n";
