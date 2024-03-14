@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:minesweeper/view/component/case.dart';
+import 'package:minesweeper/component/game/case.dart';
 import 'package:minesweeper/model/class/grille.dart';
 import 'package:minesweeper/model/class/case.dart';
 import 'package:minesweeper/model/class/coup.dart';
 
+import 'package:provider/provider.dart';
+import 'package:minesweeper/provider/game.dart';
+
 class MyGrille extends StatefulWidget {
-  final String difficulty;
   final VoidCallback winState;
   final VoidCallback loseState;
+  final VoidCallback updateMessage;
   final VoidCallback stopWatch;
 
   const MyGrille(
       {super.key,
-      required this.difficulty,
       required this.winState,
       required this.loseState,
+      required this.updateMessage,
       required this.stopWatch});
 
   @override
@@ -30,10 +33,12 @@ class MyGrilleState extends State<MyGrille> {
   @override
   void initState() {
     super.initState();
-    if (widget.difficulty == 'Easy') {
+
+    String difficulty = Provider.of<Game>(context, listen: false).difficulty;
+    if (difficulty == 'Easy') {
       taille = 4;
       nbMines = 2;
-    } else if (widget.difficulty == 'Medium') {
+    } else if (difficulty == 'Medium') {
       taille = 6;
       nbMines = 4;
     } else {
@@ -84,7 +89,10 @@ class MyGrilleState extends State<MyGrille> {
 
   void _onCaseTap(int row, int col, Actionn action) {
     setState(() {
+      Provider.of<Game>(context, listen: false).setScore(20);
+
       if (!isFinie) {
+        widget.updateMessage();
         Coordonnees coord = (ligne: row, colonne: col);
         Coup coup = Coup(row, col, action);
         Case tappedCase = grille.getCase(coord);

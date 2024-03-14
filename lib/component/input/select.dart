@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:minesweeper/context.dart';
-import 'package:minesweeper/data/storage.dart';
+
+import 'package:provider/provider.dart';
+import 'package:minesweeper/provider/game.dart';
 
 class MySelect extends StatefulWidget {
   const MySelect({
@@ -21,64 +22,22 @@ class MySelect extends StatefulWidget {
 class MySelectState extends State<MySelect> {
   MySelectState();
 
-  MyStorage storage = MyStorage();
-
-  String difficulty = "Easy";
-  Color color = const Color(0xFF06d6a0);
-
-  @override
-  void initState() {
-    super.initState();
-
-    storage.loadStorageString('difficulty').then((value) {
-      setState(() {
-        difficulty = value == '' ? "Easy" : value;
-      });
-    });
-
-    storage.loadStorageInt('color').then((value) {
-      setState(() {
-        color = value == 0 ? const Color(0xFF06d6a0) : Color(value);
-      });
-    });
-  }
-
-  String getDifficulty() {
-    return difficulty;
-  }
-
-  void updateDifficulty() {
-    setState(() {
-      if (difficulty == "Easy") {
-        difficulty = "Medium";
-        color = const Color(0xFF118ab2);
-      } else if (difficulty == "Medium") {
-        difficulty = "Hard";
-        color = const Color(0xFFef476f);
-      } else if (difficulty == "Hard") {
-        difficulty = "Easy";
-        color = const Color(0xFF06d6a0);
-      }
-      storage.saveStorageString('difficulty', difficulty);
-      storage.saveStorageInt('color', color.value);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final game = Provider.of<Game>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
         height: widget.height,
         width: widget.width,
-        color: color,
+        color: game.color,
         child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(difficulty,
+                  Text(game.difficulty,
                       style: Theme.of(context).textTheme.titleMedium),
                 ],
               ),

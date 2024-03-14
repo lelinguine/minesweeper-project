@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:minesweeper/context.dart';
 
-import 'package:minesweeper/view/component/input/button.dart';
-import 'package:minesweeper/view/component/input/default.dart';
-import 'package:minesweeper/view/component/info.dart';
+import 'package:minesweeper/component/input/button.dart';
+import 'package:minesweeper/component/input/default.dart';
+import 'package:minesweeper/component/score.dart';
 
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/rule.dart';
@@ -25,7 +24,7 @@ class MyHome extends StatelessWidget {
                   context.customTitle,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                const MyInfo(),
+                const MyScore(),
               ],
             ),
           ),
@@ -34,7 +33,7 @@ class MyHome extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: MyButton(
-                action: () => pushOptions(context, MyRule()),
+                action: () => pushOptions(context, const MyRule()),
                 child: const MyAction(
                   title: 'New game',
                   icon: 'start.png',

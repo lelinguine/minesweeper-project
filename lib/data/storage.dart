@@ -5,13 +5,11 @@ class MyStorage with ChangeNotifier {
   Future<void> saveStorageInt(String setting, int value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt(setting, value);
-    // notifyListeners();
   }
 
   Future<void> saveStorageString(String setting, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(setting, value);
-    // notifyListeners();
   }
 
   Future<int> loadStorageInt(String setting) async {
@@ -27,6 +25,5 @@ class MyStorage with ChangeNotifier {
   Future<void> clearLocalStorage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
-    // notifyListeners();
   }
 }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:minesweeper/view/component/input/button.dart';
-import 'package:minesweeper/view/component/input/default.dart';
-import 'package:minesweeper/view/component/grille.dart';
-import 'package:minesweeper/view/component/timer.dart';
-import 'package:minesweeper/view/component/status.dart';
-import 'package:minesweeper/view/component/score.dart';
+
+import 'package:minesweeper/component/input/button.dart';
+import 'package:minesweeper/component/input/default.dart';
+import 'package:minesweeper/component/game/grille.dart';
+import 'package:minesweeper/component/timer.dart';
+import 'package:minesweeper/component/status.dart';
+import 'package:minesweeper/component/result.dart';
 
 class MyGame extends StatelessWidget {
   final GlobalKey<MyStatusState> statusKey = GlobalKey();
   final GlobalKey<MyTimerState> timerKey = GlobalKey();
 
-  MyGame({super.key, required this.difficulty});
+  MyGame({super.key});
 
-  final String difficulty;
   final int score = 0;
 
   @override
@@ -29,12 +29,13 @@ class MyGame extends StatelessWidget {
                     width: 400,
                     height: 400,
                     child: MyGrille(
-                      difficulty: difficulty,
                       winState: () => statusKey.currentState!.onGameVictory(),
                       loseState: () => statusKey.currentState!.onGameLose(),
+                      updateMessage: () =>
+                          statusKey.currentState!.updateStatus(),
                       stopWatch: () => timerKey.currentState!.stopTimer(),
                     )),
-                const MyScore(),
+                const MyResult(),
               ],
             ),
           ),
