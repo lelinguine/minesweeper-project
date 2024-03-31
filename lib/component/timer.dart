@@ -36,9 +36,9 @@ class MyTimerState extends State<MyTimer> {
       setState(() {
         _elapsedTime = stopwatch.elapsed;
       });
+      Provider.of<Manager>(context, listen: false).timer =
+          stopwatch.elapsedMilliseconds.toDouble();
     }
-
-    Provider.of<Manager>(context, listen: false).timer = _elapsedTime.inSeconds;
   }
 
   void stopTimer() {

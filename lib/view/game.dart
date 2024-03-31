@@ -7,6 +7,9 @@ import 'package:minesweeper/component/timer.dart';
 import 'package:minesweeper/component/status.dart';
 import 'package:minesweeper/component/result.dart';
 
+import 'package:minesweeper/view/navigation.dart';
+import 'package:minesweeper/view/resume.dart';
+
 class MyGame extends StatelessWidget {
   final GlobalKey<MyStatusState> statusKey = GlobalKey();
   final GlobalKey<MyTimerState> timerKey = GlobalKey();
@@ -49,8 +52,7 @@ class MyGame extends StatelessWidget {
                     MyTimer(key: timerKey),
                     const SizedBox(height: 10),
                     MyButton(
-                      action: () =>
-                          Navigator.popUntil(context, (route) => route.isFirst),
+                      action: () => pushOptions(context, const MyResume()),
                       child: const MyAction(
                         title: 'Leave',
                         icon: 'finish.png',

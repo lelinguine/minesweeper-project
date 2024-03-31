@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 import 'package:minesweeper/data/storage.dart';
+
+import 'package:minesweeper/model/class/coup.dart';
 
 class Manager extends ChangeNotifier {
   MyStorage storage = MyStorage();
 
   int score = 0;
-  int coup = 0;
-  int timer = 0;
+  double timer = 0;
 
   String difficulty = 'Easy';
   Color color = const Color(0xFF06d6a0);
+
+  int nbMines = 0;
+  int taille = 0;
+
+  List<Coup> listeCoups = [];
 
   Manager() {
     loadDifficulty();
@@ -20,13 +27,26 @@ class Manager extends ChangeNotifier {
   void reset() {
     storage.saveStorageInt('score', score);
     score = 0;
-    coup = 0;
     timer = 0;
+    listeCoups.clear();
   }
 
-  void incrementCoup() {
-    coup++;
-    score = coup * timer;
+  void setScore() {
+    double coeffTempsParCase =
+        max(1.0, 10000.0 - timer / (taille * taille - nbMines).toDouble());
+    double coeffDifficulte =
+        100.00 * nbMines.toDouble() / (taille * taille).toDouble();
+    score = ((taille * taille - nbMines).toDouble() *
+            coeffTempsParCase /
+            100.0 *
+            coeffDifficulte)
+        .toInt();
+    notifyListeners();
+  }
+
+  void addMove(Coup coup) {
+    listeCoups.add(coup);
+    setScore();
     notifyListeners();
   }
 

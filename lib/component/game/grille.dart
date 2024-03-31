@@ -45,6 +45,8 @@ class MyGrilleState extends State<MyGrille> {
       taille = 8;
       nbMines = 12;
     }
+    Provider.of<Manager>(context, listen: false).nbMines = nbMines;
+    Provider.of<Manager>(context, listen: false).taille = taille;
     grille = Grille(taille: taille, nbMines: nbMines);
   }
 
@@ -89,13 +91,13 @@ class MyGrilleState extends State<MyGrille> {
 
   void _onCaseTap(int row, int col, Actionn action) {
     setState(() {
-      Provider.of<Manager>(context, listen: false).incrementCoup();
-
       if (!isFinie) {
         widget.updateMessage();
         Coordonnees coord = (ligne: row, colonne: col);
         Coup coup = Coup(row, col, action);
         Case tappedCase = grille.getCase(coord);
+
+        Provider.of<Manager>(context, listen: false).addMove(coup);
 
         if (action == Actionn.marquer && tappedCase.etat != Etat.decouverte) {
           tappedCase.etat = Etat.marquee;
