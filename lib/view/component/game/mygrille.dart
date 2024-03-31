@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:minesweeper/component/game/case.dart';
+import 'package:minesweeper/view/component/game/mycase.dart';
 import 'package:minesweeper/model/class/grille.dart';
 import 'package:minesweeper/model/class/case.dart';
 import 'package:minesweeper/model/class/coup.dart';
 
 import 'package:provider/provider.dart';
-import 'package:minesweeper/provider/manager.dart';
+import 'package:minesweeper/provider/mygamemanager.dart';
 
 class MyGrille extends StatefulWidget {
   final VoidCallback winState;
@@ -34,7 +34,8 @@ class MyGrilleState extends State<MyGrille> {
   void initState() {
     super.initState();
 
-    String difficulty = Provider.of<Manager>(context, listen: false).difficulty;
+    String difficulty =
+        Provider.of<MyGameManager>(context, listen: false).difficulty;
     if (difficulty == 'Easy') {
       taille = 4;
       nbMines = 2;
@@ -45,8 +46,8 @@ class MyGrilleState extends State<MyGrille> {
       taille = 8;
       nbMines = 12;
     }
-    Provider.of<Manager>(context, listen: false).nbMines = nbMines;
-    Provider.of<Manager>(context, listen: false).taille = taille;
+    Provider.of<MyGameManager>(context, listen: false).nbMines = nbMines;
+    Provider.of<MyGameManager>(context, listen: false).taille = taille;
     grille = Grille(taille: taille, nbMines: nbMines);
   }
 
@@ -104,7 +105,7 @@ class MyGrilleState extends State<MyGrille> {
         Case tappedCase = grille.getCase(coord);
 
         if (tappedCase.etat == Etat.couverte) {
-          Provider.of<Manager>(context, listen: false).addMove(coup);
+          Provider.of<MyGameManager>(context, listen: false).addMove(coup);
         }
 
         if (action == Actionn.marquer && tappedCase.etat != Etat.decouverte) {

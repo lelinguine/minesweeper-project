@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/context.dart';
 
 import 'package:provider/provider.dart';
-import 'package:minesweeper/provider/manager.dart';
+import 'package:minesweeper/provider/mygamemanager.dart';
 
-import 'package:minesweeper/component/input/button.dart';
-import 'package:minesweeper/component/input/default.dart';
-import 'package:minesweeper/component/input/select.dart';
+import 'package:minesweeper/view/component/input/mybutton.dart';
+import 'package:minesweeper/view/component/input/mydefaultbutton.dart';
+import 'package:minesweeper/view/component/input/myselectbutton.dart';
 
-import 'package:minesweeper/view/navigation.dart';
-import 'package:minesweeper/view/game.dart';
+import 'package:minesweeper/view/mynavigate.dart';
+import 'package:minesweeper/view/mygame.dart';
 
 class MyRule extends StatelessWidget {
   const MyRule({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final manager = Provider.of<Manager>(context);
+    final manager = Provider.of<MyGameManager>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -47,6 +47,7 @@ class MyRule extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     MyButton(
+                      color: Theme.of(context).secondaryHeaderColor,
                       action: () => manager.updateDifficulty(),
                       child: const MySelect(
                         icon: 'change.png',
@@ -56,6 +57,7 @@ class MyRule extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     MyButton(
+                      color: Theme.of(context).secondaryHeaderColor,
                       action: () => pushOptions(context, MyGame()),
                       child: const MyDefault(
                         title: 'Understand',

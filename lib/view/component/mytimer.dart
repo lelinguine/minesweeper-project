@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:provider/provider.dart';
-import 'package:minesweeper/provider/manager.dart';
+import 'package:minesweeper/provider/mygamemanager.dart';
 
 class MyTimer extends StatefulWidget {
   const MyTimer({super.key});
@@ -36,7 +36,7 @@ class MyTimerState extends State<MyTimer> {
       setState(() {
         _elapsedTime = stopwatch.elapsed;
       });
-      Provider.of<Manager>(context, listen: false).timer =
+      Provider.of<MyGameManager>(context, listen: false).timer =
           stopwatch.elapsedMilliseconds.toDouble();
     }
   }

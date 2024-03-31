@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MyButton extends StatefulWidget {
   final Widget child;
   final VoidCallback action;
+  final Color color;
 
   const MyButton({
     super.key,
     required this.child,
     required this.action,
+    required this.color,
   });
 
   @override
@@ -41,7 +42,6 @@ class MyButtonState extends State<MyButton> {
       child: GestureDetector(
         onTapUp: (TapUpDetails tapUpDetails) {
           updateOffset();
-          HapticFeedback.vibrate();
           widget.action();
         },
         onTapCancel: () {
@@ -56,11 +56,11 @@ class MyButtonState extends State<MyButton> {
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
               width: 4,
-              color: Theme.of(context).secondaryHeaderColor,
+              color: widget.color,
             ),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).secondaryHeaderColor,
+                color: widget.color,
                 offset: shadowOffset,
               ),
             ],

@@ -1,33 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/context.dart';
 
-class MyLogout extends StatelessWidget {
-  const MyLogout({
+import 'package:provider/provider.dart';
+import 'package:minesweeper/provider/mygamemanager.dart';
+
+class MySelect extends StatefulWidget {
+  const MySelect({
     super.key,
-    required this.title,
     required this.icon,
     required this.height,
     required this.width,
   });
 
-  final String title, icon;
+  final String icon;
   final double height, width;
 
   @override
+  MySelectState createState() => MySelectState();
+}
+
+class MySelectState extends State<MySelect> {
+  MySelectState();
+
+  @override
   Widget build(BuildContext context) {
+    final manager = Provider.of<MyGameManager>(context);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(19),
       child: Container(
-        height: height,
-        width: width,
-        color: const Color(0xFFef476f),
+        height: widget.height,
+        width: widget.width,
+        color: manager.color,
         child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title, style: Theme.of(context).textTheme.titleSmall),
+                  Text(manager.difficulty,
+                      style: Theme.of(context).textTheme.titleSmall),
                 ],
               ),
             ),
@@ -36,7 +48,7 @@ class MyLogout extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Image.asset(
-                  context.getAssets() + icon,
+                  context.getAssets() + widget.icon,
                   height: 18,
                 ),
               ),

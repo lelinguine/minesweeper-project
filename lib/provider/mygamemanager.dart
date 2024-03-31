@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:minesweeper/data/storage.dart';
+import 'package:minesweeper/data/mystorage.dart';
 
 import 'package:minesweeper/model/class/coup.dart';
 
-class Manager extends ChangeNotifier {
+class MyGameManager extends ChangeNotifier {
   MyStorage storage = MyStorage();
 
   int score = 0;
@@ -20,7 +20,7 @@ class Manager extends ChangeNotifier {
 
   List<Coup> listeCoups = [];
 
-  Manager() {
+  MyGameManager() {
     loadDifficulty();
   }
 

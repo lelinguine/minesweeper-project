@@ -21,7 +21,7 @@ class MyStatusState extends State<MyStatus> {
   Widget build(BuildContext context) {
     return Text(
       status,
-      style: Theme.of(context).textTheme.titleMedium,
+      style: Theme.of(context).textTheme.titleSmall,
     );
   }
 
