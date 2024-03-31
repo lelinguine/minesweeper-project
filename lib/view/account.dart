@@ -25,16 +25,16 @@ class MyAccount extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    MyButton(
-                      action: () => {},
-                      child: const MyDefault(
-                        title: 'Save',
-                        icon: 'check.png',
-                        height: 40,
-                        width: 400,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
+                    // MyButton(
+                    //   action: () => {},
+                    //   child: const MyDefault(
+                    //     title: 'Save',
+                    //     icon: 'check.png',
+                    //     height: 40,
+                    //     width: 400,
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 10),
                     MyButton(
                       action: () => {},
                       child: const MyLogout(

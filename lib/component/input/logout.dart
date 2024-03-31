@@ -16,7 +16,7 @@ class MyLogout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(19),
       child: Container(
         height: height,
         width: width,
