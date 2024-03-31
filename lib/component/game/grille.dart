@@ -60,6 +60,12 @@ class MyGrilleState extends State<MyGrille> {
           width: 2,
           color: Theme.of(context).secondaryHeaderColor,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).secondaryHeaderColor,
+            offset: const Offset(4, 4),
+          ),
+        ],
       ),
       child: GridView.builder(
         itemCount: pow(taille, 2).toInt(),
@@ -97,7 +103,11 @@ class MyGrilleState extends State<MyGrille> {
         Coup coup = Coup(row, col, action);
         Case tappedCase = grille.getCase(coord);
 
-        Provider.of<Manager>(context, listen: false).addMove(coup);
+        print(tappedCase.etat);
+
+        if (tappedCase.etat == Etat.couverte) {
+          Provider.of<Manager>(context, listen: false).addMove(coup);
+        }
 
         if (action == Actionn.marquer && tappedCase.etat != Etat.decouverte) {
           tappedCase.etat = Etat.marquee;
