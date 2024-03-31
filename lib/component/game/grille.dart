@@ -112,13 +112,11 @@ class MyGrilleState extends State<MyGrille> {
           widget.stopWatch();
           widget.loseState();
           isFinie = true;
-          Provider.of<Manager>(context, listen: false).reset();
         } else {
           if (grille.isGagnee()) {
             widget.stopWatch();
             widget.winState();
             isFinie = true;
-            Provider.of<Manager>(context, listen: false).reset();
           }
         }
       }

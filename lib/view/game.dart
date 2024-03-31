@@ -7,8 +7,8 @@ import 'package:minesweeper/component/timer.dart';
 import 'package:minesweeper/component/status.dart';
 import 'package:minesweeper/component/result.dart';
 
-import 'package:minesweeper/view/navigation.dart';
-import 'package:minesweeper/view/resume.dart';
+import 'package:provider/provider.dart';
+import 'package:minesweeper/provider/manager.dart';
 
 class MyGame extends StatelessWidget {
   final GlobalKey<MyStatusState> statusKey = GlobalKey();
@@ -20,6 +20,8 @@ class MyGame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final manager = Provider.of<Manager>(context);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -28,6 +30,8 @@ class MyGame extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyStatus(key: statusKey),
+                const MyResult(),
+                const SizedBox(height: 10),
                 SizedBox(
                     width: 400,
                     height: 400,
@@ -38,7 +42,19 @@ class MyGame extends StatelessWidget {
                           statusKey.currentState!.updateStatus(),
                       stopWatch: () => timerKey.currentState!.stopTimer(),
                     )),
-                const MyResult(),
+                Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        manager.listeCoups.isNotEmpty
+                            ? 'row ${manager.listeCoups.last.coordonnees.ligne}, column ${manager.listeCoups.last.coordonnees.colonne}'
+                            : '',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -49,10 +65,14 @@ class MyGame extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const SizedBox(height: 10),
                     MyTimer(key: timerKey),
                     const SizedBox(height: 10),
                     MyButton(
-                      action: () => pushOptions(context, const MyResume()),
+                      action: () {
+                        Provider.of<Manager>(context, listen: false).reset();
+                        Navigator.popUntil(context, (route) => route.isFirst);
+                      },
                       child: const MyAction(
                         title: 'Leave',
                         icon: 'finish.png',

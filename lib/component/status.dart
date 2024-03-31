@@ -10,7 +10,7 @@ class MyStatus extends StatefulWidget {
 }
 
 class MyStatusState extends State<MyStatus> {
-  late String status = '';
+  late String status = 'Let\'s start digging!';
 
   final List<String> encouragementMessages = [
     'Keep digging!',
