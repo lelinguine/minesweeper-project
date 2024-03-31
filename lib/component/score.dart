@@ -34,10 +34,10 @@ class MyScoreState extends State<MyScore> {
   Widget build(BuildContext context) {
     final manager = Provider.of<Manager>(context);
 
-    int score = manager.score;
+    int score = manager.best;
 
     return Text(
-      score != 0 ? "${score}pts" : "0pts",
+      score != 0 ? "${score}pts" : "",
       style: Theme.of(context).textTheme.titleMedium,
     );
   }

@@ -17,3 +17,7 @@ Route slideAnimation(Widget page) {
 void pushOptions(BuildContext context, Widget page) {
   Navigator.push(context, slideAnimation(page));
 }
+
+void replacementOptions(BuildContext context, Widget page) {
+  Navigator.pushReplacement(context, slideAnimation(page));
+}

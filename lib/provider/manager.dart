@@ -9,6 +9,7 @@ class Manager extends ChangeNotifier {
   MyStorage storage = MyStorage();
 
   int score = 0;
+  int best = 0;
   double timer = 0;
 
   String difficulty = 'Easy';
@@ -25,11 +26,13 @@ class Manager extends ChangeNotifier {
 
   // score
   void reset() {
-    // storage.saveStorageInt('score', score);
-    // score = 0;
-    // timer = 0;
-    // listeCoups.clear();
-
+    if (score > best) {
+      best = score;
+      storage.saveStorageInt('score', score);
+    }
+    score = 0;
+    timer = 0;
+    listeCoups.clear();
     notifyListeners();
   }
 

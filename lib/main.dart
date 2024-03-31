@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/context.dart';
 
-import 'package:minesweeper/view/home.dart';
+import 'package:minesweeper/view/load.dart';
 
 import 'package:provider/provider.dart';
 import 'package:minesweeper/provider/manager.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
                   color: context.isDark() ? Colors.white : Colors.black),
             ),
           ),
-          home: const MyHome(),
+          home: const MyLoad(),
         ));
   }
 }
