@@ -25,7 +25,6 @@ class MyConnect extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: MyButton(
-                // ignore: avoid_print
                 action: () => replacementOptions(context, const MyHome()),
                 child: const MyAction(
                   title: 'Connect',

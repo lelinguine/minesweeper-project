@@ -7,6 +7,9 @@ import 'package:minesweeper/component/score.dart';
 
 import 'package:minesweeper/view/navigation.dart';
 import 'package:minesweeper/view/rule.dart';
+import 'package:minesweeper/view/account.dart';
+
+import 'package:minesweeper/component/input/rond.dart';
 
 class MyHome extends StatelessWidget {
   const MyHome({super.key});
@@ -20,6 +23,15 @@ class MyHome extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                MyRond(
+                    child: ClipOval(
+                      child: Image.asset(
+                        'lib/assets/default.jpg',
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
+                    action: () => pushOptions(context, const MyAccount())),
                 Text(
                   context.customTitle,
                   style: Theme.of(context).textTheme.titleLarge,
