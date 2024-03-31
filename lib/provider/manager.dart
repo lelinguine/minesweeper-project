@@ -25,10 +25,12 @@ class Manager extends ChangeNotifier {
 
   // score
   void reset() {
-    storage.saveStorageInt('score', score);
-    score = 0;
-    timer = 0;
-    listeCoups.clear();
+    // storage.saveStorageInt('score', score);
+    // score = 0;
+    // timer = 0;
+    // listeCoups.clear();
+
+    notifyListeners();
   }
 
   void setScore() {

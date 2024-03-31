@@ -48,7 +48,7 @@ class MyGame extends StatelessWidget {
                       alignment: Alignment.bottomCenter,
                       child: Text(
                         manager.listeCoups.isNotEmpty
-                            ? 'row ${manager.listeCoups.last.coordonnees.ligne}, column ${manager.listeCoups.last.coordonnees.colonne}'
+                            ? 'row ${manager.listeCoups.last.coordonnees.ligne + 1}, column ${manager.listeCoups.last.coordonnees.colonne + 1}'
                             : '',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
