@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/context.dart';
 
 import 'package:provider/provider.dart';
-import 'package:minesweeper/provider/game.dart';
+import 'package:minesweeper/provider/manager.dart';
 
 class MySelect extends StatefulWidget {
   const MySelect({
@@ -24,20 +24,21 @@ class MySelectState extends State<MySelect> {
 
   @override
   Widget build(BuildContext context) {
-    final game = Provider.of<Game>(context);
+    final manager = Provider.of<Manager>(context);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
       child: Container(
         height: widget.height,
         width: widget.width,
-        color: game.color,
+        color: manager.color,
         child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(game.difficulty,
+                  Text(manager.difficulty,
                       style: Theme.of(context).textTheme.titleMedium),
                 ],
               ),

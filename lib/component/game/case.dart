@@ -71,7 +71,7 @@ class MyCase extends StatelessWidget {
     if (currentCase.etat == Etat.decouverte) {
       if (currentCase.minee) {
         return Image.asset(
-          "${context.getAssets()}/bomb.png",
+          "${context.getAssets()}bomb.png",
           height: 18,
         );
       } else {

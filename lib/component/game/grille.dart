@@ -6,7 +6,7 @@ import 'package:minesweeper/model/class/case.dart';
 import 'package:minesweeper/model/class/coup.dart';
 
 import 'package:provider/provider.dart';
-import 'package:minesweeper/provider/game.dart';
+import 'package:minesweeper/provider/manager.dart';
 
 class MyGrille extends StatefulWidget {
   final VoidCallback winState;
@@ -34,7 +34,7 @@ class MyGrilleState extends State<MyGrille> {
   void initState() {
     super.initState();
 
-    String difficulty = Provider.of<Game>(context, listen: false).difficulty;
+    String difficulty = Provider.of<Manager>(context, listen: false).difficulty;
     if (difficulty == 'Easy') {
       taille = 4;
       nbMines = 2;
@@ -89,7 +89,7 @@ class MyGrilleState extends State<MyGrille> {
 
   void _onCaseTap(int row, int col, Actionn action) {
     setState(() {
-      Provider.of<Game>(context, listen: false).setScore(20);
+      Provider.of<Manager>(context, listen: false).incrementCoup();
 
       if (!isFinie) {
         widget.updateMessage();
@@ -110,11 +110,13 @@ class MyGrilleState extends State<MyGrille> {
           widget.stopWatch();
           widget.loseState();
           isFinie = true;
+          Provider.of<Manager>(context, listen: false).reset();
         } else {
           if (grille.isGagnee()) {
             widget.stopWatch();
             widget.winState();
             isFinie = true;
+            Provider.of<Manager>(context, listen: false).reset();
           }
         }
       }

@@ -4,7 +4,7 @@ import 'package:minesweeper/context.dart';
 import 'package:minesweeper/view/home.dart';
 
 import 'package:provider/provider.dart';
-import 'package:minesweeper/provider/game.dart';
+import 'package:minesweeper/provider/manager.dart';
 import 'package:minesweeper/provider/user.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => User()),
-          ChangeNotifierProvider(create: (context) => Game()),
+          ChangeNotifierProvider(create: (context) => Manager()),
         ],
         child: MaterialApp(
           title: context.customTitle,

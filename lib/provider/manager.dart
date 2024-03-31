@@ -2,39 +2,31 @@ import 'package:flutter/material.dart';
 
 import 'package:minesweeper/data/storage.dart';
 
-class Game extends ChangeNotifier {
+class Manager extends ChangeNotifier {
   MyStorage storage = MyStorage();
 
   int score = 0;
-  int timer = 1;
-  int mul = 1;
+  int coup = 0;
+  int timer = 0;
+
   String difficulty = 'Easy';
   Color color = const Color(0xFF06d6a0);
 
-  Game() {
+  Manager() {
     loadDifficulty();
   }
 
   // score
   void reset() {
-    score = 0;
-  }
-
-  void saveScore() {
     storage.saveStorageInt('score', score);
+    score = 0;
+    coup = 0;
+    timer = 0;
   }
 
-  void updateScore() {
-    score++;
-    notifyListeners();
-  }
-
-  int getScore() {
-    return score;
-  }
-
-  void setScore(int value) {
-    score = value * mul * timer;
+  void incrementCoup() {
+    coup++;
+    score = coup * timer;
     notifyListeners();
   }
 
@@ -64,15 +56,6 @@ class Game extends ChangeNotifier {
     }
     storage.saveStorageString('difficulty', difficulty);
     storage.saveStorageInt('color', color.value);
-    notifyListeners();
-  }
-
-  String getDifficulty() {
-    return difficulty;
-  }
-
-  void setDifficulty(String value) {
-    difficulty = value;
     notifyListeners();
   }
 }
