@@ -55,7 +55,7 @@ class MyGrilleState extends State<MyGrille> {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(
           width: 2,
           color: Theme.of(context).secondaryHeaderColor,

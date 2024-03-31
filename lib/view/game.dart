@@ -30,7 +30,7 @@ class MyGame extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyStatus(key: statusKey),
-                const MyResult(),
+                MyTimer(key: timerKey),
                 const SizedBox(height: 10),
                 SizedBox(
                     width: 400,
@@ -66,7 +66,7 @@ class MyGame extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 10),
-                    MyTimer(key: timerKey),
+                    const MyResult(),
                     const SizedBox(height: 10),
                     MyButton(
                       action: () {

@@ -17,7 +17,7 @@ class MyResultState extends State<MyResult> {
 
     return Text(
       score != 0 ? "${score}pts" : "0pts",
-      style: Theme.of(context).textTheme.titleSmall,
+      style: Theme.of(context).textTheme.bodyMedium,
     );
   }
 }

@@ -30,19 +30,19 @@ class MyCase extends StatelessWidget {
 
     if (isFirstRow && isFirstColumn) {
       borderRadius = const BorderRadius.only(
-        topLeft: Radius.circular(18),
+        topLeft: Radius.circular(21),
       );
     } else if (isFirstRow && isLastColumn) {
       borderRadius = const BorderRadius.only(
-        topRight: Radius.circular(18),
+        topRight: Radius.circular(21),
       );
     } else if (isLastRow && isFirstColumn) {
       borderRadius = const BorderRadius.only(
-        bottomLeft: Radius.circular(18),
+        bottomLeft: Radius.circular(21),
       );
     } else if (isLastRow && isLastColumn) {
       borderRadius = const BorderRadius.only(
-        bottomRight: Radius.circular(18),
+        bottomRight: Radius.circular(21),
       );
     }
 

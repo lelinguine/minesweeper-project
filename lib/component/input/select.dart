@@ -27,7 +27,7 @@ class MySelectState extends State<MySelect> {
     final manager = Provider.of<Manager>(context);
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(19),
       child: Container(
         height: widget.height,
         width: widget.width,

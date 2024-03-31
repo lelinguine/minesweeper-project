@@ -16,6 +16,9 @@ class MyConnect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
       body: Stack(
         children: [
           Align(
@@ -24,14 +27,16 @@ class MyConnect extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Connect",
+                  "Account",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 80),
+                const Text("Login"),
                 const MyField(
                   height: 60,
                   width: 400,
                 ),
+                const Text("Password"),
                 const MyField(
                   height: 60,
                   width: 400,
@@ -46,25 +51,7 @@ class MyConnect extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    MyButton(
-                      action: () => replacementOptions(context, const MyHome()),
-                      child: const MyDefault(
-                        title: 'Invite',
-                        icon: 'check.png',
-                        height: 40,
-                        width: 400,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    MyButton(
-                      action: () => {},
-                      child: const MyDefault(
-                        title: 'Create',
-                        icon: 'check.png',
-                        height: 40,
-                        width: 400,
-                      ),
-                    ),
+                    const Text("Create"),
                     const SizedBox(height: 10),
                     MyButton(
                       action: () => {},

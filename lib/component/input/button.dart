@@ -53,7 +53,7 @@ class MyButtonState extends State<MyButton> {
         child: Container(
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(24),
             border: Border.all(
               width: 4,
               color: Theme.of(context).secondaryHeaderColor,

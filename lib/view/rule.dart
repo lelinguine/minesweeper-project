@@ -33,11 +33,6 @@ class MyRule extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Rules",
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 80),
-                    Text(
                       context.customRule,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
