@@ -38,6 +38,10 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                   color: context.isDark() ? Colors.white : Colors.black),
               titleMedium: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.w700,
+                  color: context.isDark() ? Colors.white : Colors.black),
+              titleSmall: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.w600,
                   color: context.isDark() ? Colors.white : Colors.black),

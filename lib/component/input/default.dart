@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:minesweeper/context.dart';
 
-class MyAction extends StatelessWidget {
-  const MyAction(
+class MyDefault extends StatelessWidget {
+  const MyDefault(
       {super.key,
       required this.title,
       required this.icon,
@@ -24,7 +24,7 @@ class MyAction extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(title, style: Theme.of(context).textTheme.titleMedium),
+                  Text(title, style: Theme.of(context).textTheme.titleSmall),
                 ],
               ),
             ),

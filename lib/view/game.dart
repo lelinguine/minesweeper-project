@@ -73,7 +73,7 @@ class MyGame extends StatelessWidget {
                         Provider.of<Manager>(context, listen: false).reset();
                         Navigator.popUntil(context, (route) => route.isFirst);
                       },
-                      child: const MyAction(
+                      child: const MyDefault(
                         title: 'Leave',
                         icon: 'finish.png',
                         height: 40,

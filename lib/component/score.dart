@@ -38,7 +38,7 @@ class MyScoreState extends State<MyScore> {
 
     return Text(
       score != 0 ? "${score}pts" : "",
-      style: Theme.of(context).textTheme.titleMedium,
+      style: Theme.of(context).textTheme.titleSmall,
     );
   }
 }

@@ -11,6 +11,9 @@ import 'package:minesweeper/view/account.dart';
 
 import 'package:minesweeper/component/input/rond.dart';
 
+import 'package:provider/provider.dart';
+import 'package:minesweeper/provider/user.dart';
+
 class MyHome extends StatelessWidget {
   const MyHome({super.key});
 
@@ -46,7 +49,7 @@ class MyHome extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: MyButton(
                 action: () => pushOptions(context, const MyRule()),
-                child: const MyAction(
+                child: const MyDefault(
                   title: 'New game',
                   icon: 'start.png',
                   height: 40,

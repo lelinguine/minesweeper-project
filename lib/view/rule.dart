@@ -29,9 +29,19 @@ class MyRule extends StatelessWidget {
               alignment: Alignment.center,
               child: SizedBox(
                 width: 400,
-                child: Text(
-                  context.customRule,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Rules",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 80),
+                    Text(
+                      context.customRule,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
                 ),
               )),
           Container(
@@ -52,7 +62,7 @@ class MyRule extends StatelessWidget {
                     const SizedBox(height: 10),
                     MyButton(
                       action: () => pushOptions(context, MyGame()),
-                      child: const MyAction(
+                      child: const MyDefault(
                         title: 'Understand',
                         icon: 'check.png',
                         height: 40,
