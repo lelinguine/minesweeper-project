@@ -1,6 +1,82 @@
 # See https://www.dartlang.org/guides/libraries/private-files
 
-# Files and directories created by pub
+# Fichiers/Dossiers générés par Flutter/Dart
 .dart_tool/
 .packages
-build/.DS_Store
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvm/
+
+# Caches de pub
+.pub-cache/
+
+# Fichiers lock (sauf ceux requis pour certains workflows)
+pubspec.lock
+
+# Fichiers de logs & dérivés
+*.log
+
+# Dossiers de couverture de tests
+coverage/
+
+# Système d’exploitation
+.DS_Store
+*.swp
+*.swo
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Configurations VS Code
+.vscode/
+.history/
+
+# Configurations IntelliJ/Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Android spécifiques
+android/.gradle/
+android/app/build/
+android/app/*.apk
+android/app/*.aab
+android/key.properties
+android/app/google-services.json
+
+# iOS/MacOS spécifiques
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Runner.xcworkspace/
+ios/.generated/
+ios/Pods/
+ios/.symlinks/
+ios/build/
+ios/Flutter/flutter_export_environment.sh
+macos/Pods/
+macos/Flutter/
+
+# Fichiers sensibles ou configuration d’accès
+*.jks
+*.keystore
+*.pem
+*.p12
+*.crt
+*.key
+.env
+
+# Autres fichiers à ignorer
+*.bak
+*.tmp
+
+# Exceptions à ne PAS ignorer
+!pubspec.yaml
+!assets/
+!lib/
